@@ -39,12 +39,25 @@
                // console.log(orderToppingList.sort()) ;
                 orderToppingList.sort();
                 toppingList = orderToppingList.toString();
-                console.log(toppingList);
+                // console.log(toppingList);
 
                 for (let x = 0; x < combinations.length; x++) {
 
+                    if (combinations[x].toppings === toppingList) {
+                        comboToppingList = combinations[x].toppings;
+                        found = true;
+                        comboToppingList.count++;
 
+                        console.log(comboToppingList);
 
+                    }
+                }
+
+                if (!found) {
+                    comboToppingList.push({
+                        count : 1,
+                        toppingList : toppingList
+                    });
                 }
 
 
