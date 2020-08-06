@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Pizza Exercise</title>
+</head>
+<body>
+
+
+<script>
+
+    let proxyURL = "https://cors-anywhere.herokuapp.com/";
+    let requestURL = 'https://www.olo.com/pizzas.json';
+    let request = new XMLHttpRequest();
+
+    request.open('GET', proxyURL + requestURL);
+    request.responseType = 'text'; // now we're getting a string!
+    request.send();
+
+    request.onload = function() {
+        const ordersText = request.response; // get the string from the response
+        const orders = JSON.parse(ordersText); // convert it to an object
+        let combinations = [];
+        let toppingList;
+        let comboToppingList;
+
+        // console.log(orders[0].toppings[0]);
+
+        for (let i = 0; i < orders.length; i++) {
+
+            let found = false;
+
+            let orderToppingList = orders[i].toppings;
+
+            // console.log(toppingList);
+
+            if (orderToppingList.length > 1) {
+                // console.log(orderToppingList);
+               // console.log(orderToppingList.sort()) ;
+                orderToppingList.sort();
+                toppingList = orderToppingList.toString();
+                console.log(toppingList);
+
+                for (let x = 0; x < combinations.length; x++) {
+
+
+
+                }
+
+
+            }
+
+
+        }
+
+        // for (let i = 0; i < toppings.length; i++) {
+        //
+        //     let found = false;
+        //
+        //     if(toppings[i].toppings.length > 1) toppings[i].toppings.sort();
+        //
+        //     for (let x = 0; x < toppingCounts.length; x++) {
+        //
+        //         let toppings[x].toppingList = toppings[i].toppings.toString();
+        //
+        //         if (toppingCounts[x].toppingList == toppings[i].toppingList) {
+        //
+        //             found = true;
+        //             toppingCounts[x].count++;
+        //             continue;
+        //         }
+        //     }
+        //
+        //     if (!found) {
+        //         toppingCounts.push({
+        //             count : 1,
+        //             toppingList : toppings[i].toppingList
+        //         });
+        //     }
+        //
+        //     toppingCounts =
+        // }
+    }
+
+</script>
+
+</body>
+</html>
