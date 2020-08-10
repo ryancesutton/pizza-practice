@@ -17,83 +17,34 @@
     request.responseType = 'text'; // now we're getting a string!
     request.send();
 
-    request.onload = function() {
+    request.onload = function () {
         const ordersText = request.response; // get the string from the response
         const orders = JSON.parse(ordersText); // convert it to an object
-        let combinations = [];
-        let toppingList;
-        let comboToppingList;
-
-        // console.log(orders[0].toppings[0]);
-
-        for (let i = 0; i < orders.length; i++) {
-
-            let found = false;
-
-            let orderToppingList = orders[i].toppings;
-
-            // console.log(toppingList);
-
-            if (orderToppingList.length > 1) {
-                // console.log(orderToppingList);
-               // console.log(orderToppingList.sort()) ;
-                orderToppingList.sort();
-                toppingList = orderToppingList.toString();
-                // console.log(toppingList);
-
-                for (let x = 0; x < combinations.length; x++) {
-
-                    if (combinations[x].toppings === toppingList) {
-                        comboToppingList = combinations[x].toppings;
-                        found = true;
-                        comboToppingList.count++;
-
-                        console.log(comboToppingList);
-
-                    }
-                }
-
-                if (!found) {
-                    comboToppingList.push({
-                        count : 1,
-                        toppingList : toppingList
-                    });
-                }
-
-
-            }
-
-
+        let count = 0;
+        let current = null;
+        let newToppingsList = [];
+        for (let i = 0; i < orders.length; i++) { //loops through all orders
+            let orderToppingList = orders[i].toppings; //returns list for of all toppings per order sorted
+            orderToppingList = orderToppingList.sort();
+            orderToppingList = orderToppingList.toString();//converts list of toppings to string
+            newToppingsList.push(orderToppingList);//adds orderToppingList to newToppingsList array
         }
+        newToppingsList.sort();
+        // console.log(newToppingsList);
+        for(let j = 0; j < newToppingsList.length; j++) {
+            if (newToppingsList[j] != current) {
+                // console.log('counted');
+                if (count > 0) {
+                    console.log(newToppingsList[j - 1] + " was counted " + count)
+                }
+                current = newToppingsList[j];
+                count = 1;
+            } else {
+                count++;
+            }
+        }
+    };
 
-        // for (let i = 0; i < toppings.length; i++) {
-        //
-        //     let found = false;
-        //
-        //     if(toppings[i].toppings.length > 1) toppings[i].toppings.sort();
-        //
-        //     for (let x = 0; x < toppingCounts.length; x++) {
-        //
-        //         let toppings[x].toppingList = toppings[i].toppings.toString();
-        //
-        //         if (toppingCounts[x].toppingList == toppings[i].toppingList) {
-        //
-        //             found = true;
-        //             toppingCounts[x].count++;
-        //             continue;
-        //         }
-        //     }
-        //
-        //     if (!found) {
-        //         toppingCounts.push({
-        //             count : 1,
-        //             toppingList : toppings[i].toppingList
-        //         });
-        //     }
-        //
-        //     toppingCounts =
-        // }
-    }
 
 </script>
 
