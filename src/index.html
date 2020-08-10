@@ -30,18 +30,28 @@
             newToppingsList.push(orderToppingList);//adds orderToppingList to newToppingsList array
         }
         newToppingsList.sort();
+        let toppingMap = new Map();
         // console.log(newToppingsList);
         for(let j = 0; j < newToppingsList.length; j++) {
             if (newToppingsList[j] != current) {
                 // console.log('counted');
                 if (count > 0) {
-                    console.log(newToppingsList[j - 1] + " was counted " + count)
+                    // console.log(newToppingsList[j - 1] + " was counted " + count)
+                    toppingMap.set(newToppingsList[j - 1], count);
+
+
                 }
                 current = newToppingsList[j];
                 count = 1;
             } else {
                 count++;
             }
+        }
+        toppingMap[Symbol.iterator] = function* () {
+            yield* [...this.entries()].sort((a, b) => b[1] - a[1]);
+        };
+        for (let [key, value] of toppingMap) {
+            console.log("toppings:" + key + " times ordered: " + value);
         }
     };
 
