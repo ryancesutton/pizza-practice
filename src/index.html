@@ -6,6 +6,16 @@
 </head>
 <body>
 
+<h1>Top 20 Topping Combinations</h1>
+
+<ul id="topping-list">
+
+</ul>
+
+<script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
 
 <script>
 
@@ -48,9 +58,15 @@
             }
         }
         toppingMap[Symbol.iterator] = function* () {
-            yield* [...this.entries()].sort((a, b) => b[1] - a[1]);
+            yield* [...this.entries()].sort((a, b) => b[1] - a[1]).slice(0, 20);
         };
+        let html = "";
         for (let [key, value] of toppingMap) {
+
+
+            html += ` <li>Topping Combo: ${key} -- Times Ordered: ${value}</li> `;
+            $('#topping-list').html(html);
+
             console.log("toppings:" + key + " times ordered: " + value);
         }
     };
